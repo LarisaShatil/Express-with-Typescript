@@ -6,3 +6,9 @@ FIRST STEP:
 4. Create and set up tsconfig.json
    a. Install and extend `@tsconfig/node20`
    b. Add compiler options: `rootDir` and `outDir`
+
+## Definitely Typed Repository
+Link: https://github.com/DefinitelyTyped/DefinitelyTyped
+
+1. @types/express
+2. @types/cors
