@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "npx tsc && node dist/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prettier": "prettier --ignore-path .gitignore --write \"./src/**/*.+(js|ts|json)\"",
+    "prettier:fix": "prettier --write src"
   },
   "keywords": [],
   "author": "",
