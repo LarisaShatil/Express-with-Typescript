@@ -16,13 +16,15 @@ app.get(
     req: Request<{}, unknown,{},{species?:string}>,
     res: Response<Pet[]>
   ): void => {
-    const {species} = req.query;
+    const { species } = req.query;
+    const normalizedSpecies:string | undefined = species?.toLocaleLowerCase()
+    
     let filteredPets: Pet[] = pets;
 
-    if (species) {
+    if (normalizedSpecies) {
       filteredPets = filteredPets.filter(
         (pet: Pet): boolean =>
-          species.toLowerCase() === pet.species.toLowerCase()
+          normalizedSpecies === pet.species.toLowerCase()
       );
     }
 
@@ -45,7 +47,7 @@ app.get(
     } else {
       res
         .status(404)
-        .json({ message: `The id ${id} doesn't exists` });
+        .json({ message: `A pet with id ${id} doesn't exist` });
     }
   }
 );
