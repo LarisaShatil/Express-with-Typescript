@@ -10,15 +10,23 @@ const app: Express = express();
 
 app.use(cors());
 
+type PetQueryParams = {
+  species?: string;
+  adopted?: 'true' | 'false';
+};
+
 app.get(
   '/',
   (
-    req: Request<{}, unknown,{},{species?:string}>,
+    req: Request<{}, unknown, {}, PetQueryParams>,
     res: Response<Pet[]>
   ): void => {
-    const { species } = req.query;
-    const normalizedSpecies:string | undefined = species?.toLocaleLowerCase()
-    
+    const { species, adopted } = req.query;
+  
+
+    const normalizedSpecies: string | undefined =
+      species?.toLowerCase();
+
     let filteredPets: Pet[] = pets;
 
     if (normalizedSpecies) {
@@ -26,6 +34,11 @@ app.get(
         (pet: Pet): boolean =>
           normalizedSpecies === pet.species.toLowerCase()
       );
+    }
+    if (adopted) {
+      filteredPets = filteredPets.filter(
+        (pet: Pet): boolean =>
+          JSON.parse(adopted) === pet.adopted)
     }
 
     res.json(filteredPets);
