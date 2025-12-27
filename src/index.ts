@@ -13,6 +13,8 @@ app.use(cors());
 type PetQueryParams = {
   species?: string;
   adopted?: 'true' | 'false';
+  minAge?: string;
+  maxAge?: string;
 };
 
 app.get(
@@ -21,24 +23,38 @@ app.get(
     req: Request<{}, unknown, {}, PetQueryParams>,
     res: Response<Pet[]>
   ): void => {
-    const { species, adopted } = req.query;
-  
-
-    const normalizedSpecies: string | undefined =
-      species?.toLowerCase();
+    const { species, adopted, minAge, maxAge } = req.query;
 
     let filteredPets: Pet[] = pets;
 
-    if (normalizedSpecies) {
+    if (species) {
+    const normalizedSpecies: string | undefined =
+      species?.toLowerCase();
       filteredPets = filteredPets.filter(
         (pet: Pet): boolean =>
           normalizedSpecies === pet.species.toLowerCase()
       );
     }
     if (adopted) {
+      const isAdopted = adopted === 'true';
+
       filteredPets = filteredPets.filter(
-        (pet: Pet): boolean =>
-          JSON.parse(adopted) === pet.adopted)
+        (pet: Pet): boolean => isAdopted === pet.adopted
+      );
+    }
+
+    if (minAge) {
+      const min = Number(minAge)
+      filteredPets = filteredPets.filter(
+        (pet: Pet): boolean => min <= pet.age
+      );
+    } 
+
+    if (maxAge) {
+      const max = Number(maxAge);
+      filteredPets = filteredPets.filter(
+        (pet: Pet): boolean => max >= pet.age
+      );
     }
 
     res.json(filteredPets);

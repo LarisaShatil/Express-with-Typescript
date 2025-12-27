@@ -10,5 +10,9 @@ http://localhost:8000/?species=cat
 # Getting adopted species
 http://localhost:8000/?adopted=true
 
+# Getting adopted species within certain age parameters
+http://localhost:8000/?adopted=true&species=dog&minAge=5
+http://localhost:8000/?adopted=true&species=dog&minAge=5&maxAge=6
+
 # Wrong route or id
 http://localhost:8000/456
