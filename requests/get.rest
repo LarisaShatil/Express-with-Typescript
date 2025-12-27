@@ -1,18 +1,18 @@
 # Ctrl + Alt + R
-http://localhost:8000/
+http://localhost:8000/pets
 
 # Getting an object with spesific id
-http://localhost:8000/4
+http://localhost:8000/pets/4
 
 # Getting spesific species
-http://localhost:8000/?species=cat
+http://localhost:8000/pets/?species=cat
 
 # Getting adopted species
-http://localhost:8000/?adopted=true
+http://localhost:8000/pets/?adopted=true
 
 # Getting adopted species within certain age parameters
-http://localhost:8000/?adopted=true&species=dog&minAge=5
-http://localhost:8000/?adopted=true&species=dog&minAge=5&maxAge=6
+http://localhost:8000/pets/?adopted=true&species=dog&minAge=5
+http://localhost:8000/pets/?adopted=true&species=dog&minAge=5&maxAge=6
 
 # Wrong route or id
 http://localhost:8000/456
