@@ -9,7 +9,19 @@ export const validateNumericId= (
   
   if (!Number.isInteger(Number(id))) {
     res.status(400).json({ message: 'Pet ID must be a number' });
-  } else {
-    next();
   }
+    next();
+}
+
+export const isAuthorised = (
+  req: Request<{}, unknown, {}, {password?:string}>,
+  res: Response<{message:string}>,
+  next:NextFunction
+) => {
+  const { password } = req.query;
+  
+  if (password !== 'please') {
+    res.status(401).json({message:'A wrong password'})
+  }
+  next()
 }

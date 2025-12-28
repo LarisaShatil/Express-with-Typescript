@@ -25,6 +25,7 @@ export const getPets = (
         normalizedSpecies === pet.species.toLowerCase()
     );
   }
+
   if (adopted) {
     const isAdopted = adopted === 'true';
 
