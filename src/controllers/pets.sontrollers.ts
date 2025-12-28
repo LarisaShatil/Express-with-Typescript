@@ -51,7 +51,7 @@ export const getPets = (
 };
 
 export const getPetById = (
-  req: Request<{ id: number }>,
+  req: Request<{ id: string }>,
   res: Response<Pet | { message: string }>
 ): void => {
   const id: number = Number(req.params.id);
